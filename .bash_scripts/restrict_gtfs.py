@@ -48,8 +48,6 @@ def restrict_trips(feed, values, args):
     return feed.restrict_to_trips(values)
 
 
-# Maps each CLI flag (dest name) to its restriction function.
-# To add a restriction: write a function and register it here and in parse_args.
 RESTRICTIONS = {
     "area": restrict_area,
     "agencies": restrict_agencies,
