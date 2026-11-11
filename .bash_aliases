@@ -15,6 +15,11 @@ alias nohup-jpnb="nohup jupyter notebook > /tmp/jpnb.log 2>&1 &"
 alias ipynb-clean="jupyter nbconvert --clear-output --inplace *ipynb"
 
 # General
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 watchLog() {
   # Watch a logfile
   watch -n3 "tail -n30 /tmp/$1.log"
