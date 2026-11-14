@@ -1,5 +1,5 @@
 # Non-interactive shells exit early
-case $- in *i*) ;; *) return;; esac
+[[ $- != *i* ]] && return
 
 # Homebrew
 for b in /home/linuxbrew/.linuxbrew/bin/brew /opt/homebrew/bin/brew /usr/local/bin/brew; do
@@ -14,7 +14,7 @@ HISTFILESIZE=2000
 
 # Input & terminal
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-bind 'set show-all-if-ambiguous on'
+# bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
 stty -ixon
 
@@ -35,5 +35,7 @@ export PATH="$PATH:$HOME/.local/bin"
 # WSL
 if [ -n "$WSL_DISTRO_NAME" ]; then
     export BROWSER="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
-    [ -f ~/.c314/bin/activate ] && source ~/.c314/bin/activate
 fi
+
+# Python environment
+[ -f ~/.venv/bin/activate ] && source ~/.venv/bin/activate
