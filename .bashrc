@@ -19,7 +19,7 @@ bind 'TAB:menu-complete'
 stty -ixon
 
 # Prompt & xterm title
-PS1='\u@\[\e[2m\]\h\[\e[0m\] [\[\e[92;3m\]\D{%H:%M}\[\e[0m\]] \[\e[92m\]>\[\e[0m\] '
+PS1='\u@\[\e[2m\]\h\[\e[0m\] [\[\e[92;3m\]\D{%H:%M}\[\e[0m\]] \[\e[0;$(($?==0?92:91))m\]> \[\e[0m\]'
 case "$TERM" in xterm*|rxvt*) PS1="\[\e]0;\u@\h: \w\a\]$PS1" ;; esac
 
 # Aliases & completion
