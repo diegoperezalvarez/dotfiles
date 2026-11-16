@@ -28,6 +28,7 @@ catLog() {
 }
 alias rem="sudo mount -a"
 alias ka="kill $(jobs -p)"
+alias git-pull-all="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;"
 # alias dockerStart="sudo echo 'Enter Permissions: '; sudo dockerd > ~/.dockerd.log 2>&1 &"
 # alias dockerCVAT="(cd ~/GitHub/cvat; sudo docker exec -it cvat_server > ~/.CVAT.log 2>&1) &"
 alias dockerStart="sudo dockerd > /tmp/dockerd.log 2>&1 &"
