@@ -23,6 +23,7 @@ PS1='\u@\[\e[2m\]\h\[\e[0m\] [\[\e[92;3m\]\D{%H:%M}\[\e[0m\]] \[\e[0;$(($?==0?92
 case "$TERM" in xterm*|rxvt*) PS1="\[\e]0;\u@\h: \w\a\]$PS1" ;; esac
 
 # Aliases & completion
+alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases
 if ! shopt -oq posix; then
     [ -f /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
