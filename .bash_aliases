@@ -26,6 +26,9 @@ catLog() {
   # cat a logfile for grep
   cat "/tmp/$1.log"
 }
+qnotes() {  # Query your notes for something
+    grep --color=auto "$@" ~/.notes.md
+}
 alias rem="sudo mount -a"
 alias ka="kill $(jobs -p)"
 alias git-pull-all="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;"
