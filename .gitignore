@@ -1,8 +1,9 @@
 *
 
 # Don't ignore these!
-!./.bash_scripts/*
-!.bashrc
+!.bash_scripts/*
 !.bash_aliases
-!.requirements.txt
+!.bashrc
+!.gitignore
 !.notes.md
+!.requirements.txt
