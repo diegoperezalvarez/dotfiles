@@ -1,0 +1,8 @@
+*
+
+# Don't ignore these!
+!./.bash_scripts/*
+!.bashrc
+!.bash_aliases
+!.requirements.txt
+!.notes.md
