@@ -9,10 +9,11 @@ alias create_map="~/.bash_scripts/create_map.py"
 alias gis_layer_inventory="~/.bash_scripts/gis_layer_inventory.py"
 alias agg_to_gpkg="~/.bash_scripts/agg_to_gpkg.py"
 
-# Jupyter (obsolete, I use marimo now)
+# Notebooks
 alias jpnb="jupyter notebook"
 alias nohup-jpnb="nohup jupyter notebook > /tmp/jpnb.log 2>&1 &"
 alias ipynb-clean="jupyter nbconvert --clear-output --inplace *ipynb"
+alias nohup-marimo="nohup marimo edit > /tmp/marimo.log 2>&1 &"
 
 # General
 alias ls='ls --color=auto'
