@@ -22,12 +22,16 @@ def parse_args(argv):
         "glob_path", help="Path to glob *.zip files."
     )
     parser.add_argument(
-        "output_path", help="Path to output csv file."
+        "output_csv", help="Path to output csv file."
     )
     parser.add_argument(
-        "--parquet", default=False,
+        "--to-parquet", default=False,
         action=argparse.BooleanOptionalAction,
-        help="Optionally parse the output_path to parquet."
+        help=(
+            "Optionally compress the output to parquet after processing."
+            "Running this script on an already created output.csv with this"
+            "flag has the same effect."
+        )
     )
     return parser.parse_args(argv)
 
@@ -90,12 +94,12 @@ def main(argv=None):
     args = parse_args(argv)
     paths = sorted(glob(args.glob_path))
 
-    if os.path.exists(args.output_path) and args.parquet:
-        csv_to_parquet(args.output_path)
+    if os.path.exists(args.output_csv) and args.to_parquet:
+        csv_to_parquet(args.output_csv)
         return 0
 
     include_header = True
-    with open(args.output_path, "ab") as out_f:
+    with open(args.output_csv, "ab") as out_f:
         for path in paths:
             print(path)
             feed = gtfs_realtime_pb2.FeedMessage()
@@ -109,8 +113,8 @@ def main(argv=None):
             df.write_csv(out_f, include_header=include_header)
             include_header = False
 
-    if args.parquet:
-         csv_to_parquet(args.output_path)
+    if args.to_parquet:
+         csv_to_parquet(args.output_csv)
 
     return 0
 
