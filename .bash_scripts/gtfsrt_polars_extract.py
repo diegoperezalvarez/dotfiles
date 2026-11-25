@@ -99,7 +99,7 @@ def main(argv=None):
         return 0
 
     if len(paths) < 1:
-        raise ValueError(f"Given glob is incorrect. {glob_path=}")
+        raise ValueError(f"Given glob is incorrect. {args.glob_path=}")
 
     include_header = True
     with open(args.output_csv, "ab") as out_f:
