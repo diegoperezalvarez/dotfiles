@@ -31,10 +31,10 @@ git --git-dir="$DOTFILES_DIR" --work-tree="$HOME" config --local status.showUntr
 echo "Checking out dotfiles into $HOME..."
 git --git-dir="$DOTFILES_DIR" --work-tree="$HOME" checkout -f
 
-# 4. Make all .sh and .py scripts in ~/.bash_scripts executable
-if [ -d "$HOME/.bash_scripts" ]; then
+# 4. Make all .sh and .py scripts in ~/.scripts executable
+if [ -d "$HOME/.scripts" ]; then
     echo "Making .sh and .py scripts executable..."
-    find "$HOME/.bash_scripts" -type f \( -name "*.sh" -o -name "*.py" \) -exec chmod +x {} +
+    find "$HOME/.scripts" -type f \( -name "*.sh" -o -name "*.py" \) -exec chmod +x {} +
 fi
 
 echo "=== Setup Complete ==="
