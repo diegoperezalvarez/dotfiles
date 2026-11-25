@@ -1,11 +1,11 @@
 *
 
 # Don't ignore these!
+!.agents/**
 !.bash_aliases
-!.bash_scripts/*
+!.bash_scripts/**
 !.bashrc
-!.github/*
+!.github/**
 !.gitignore
 !.notes.md
 !.requirements.txt
-!.agents/**
