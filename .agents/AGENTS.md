@@ -8,7 +8,7 @@ This is a personal dotfiles repository managed as a **bare Git repository** with
 
 - `.bashrc` — interactive Bash configuration, prompt, completion, PATH, WSL handling, and `~/.venv` activation.
 - `.bash_aliases` — shell aliases and functions, including helper-script aliases and optional AWS configuration.
-- `.bash_scripts/` — Python and shell helpers for GTFS/GTFS-realtime, GIS, mapping, filtering, and dotfiles bootstrap.
+- `.scripts/` — Python and shell helpers for GTFS/GTFS-realtime, GIS, mapping, filtering, and dotfiles bootstrap.
 - `.requirements.txt` — Python dependencies for personal data, geospatial, visualization, and agent workflows.
 - `.notes.md` — personal reference material.
 - `.github/README.md` — repository setup documentation.
@@ -27,13 +27,13 @@ This is a personal dotfiles repository managed as a **bare Git repository** with
 
 ## Bootstrap safety
 
-`.bash_scripts/dotfiles_init.sh` is destructive:
+`.scripts/dotfiles_init.sh` is destructive:
 
 - It clones the repository as a bare repo into `~/.dotfiles`.
 - It hides untracked files in the home directory via `status.showUntrackedFiles no`.
 - It runs `git checkout -f` and overwrites matching files in `$HOME`.
 - It refuses to run with `sudo` or as root.
-- It makes executable `.sh` and `.py` files beneath `~/.bash_scripts`.
+- It makes executable `.sh` and `.py` files beneath `~/.scripts`.
 
 Review the script before running it. Back up any existing dotfiles that could conflict. Do not use bootstrap or other home-directory-modifying commands solely as validation.
 
@@ -41,8 +41,8 @@ Review the script before running it. Back up any existing dotfiles that could co
 
 No automated test suite or CI workflow is currently present. Choose checks relevant to files changed:
 
-- Bash: `bash -n .bashrc .bash_aliases .bash_scripts/*.sh`
-- Python: `python -m compileall -q .bash_scripts`
+- Bash: `bash -n .bashrc .bash_aliases .scripts/*.sh`
+- Python: `python -m compileall -q .scripts`
 - Helper behavior: run it only with a small, safe fixture and avoid commands that modify the home directory.
 - Dependencies: verify `.requirements.txt` only in an environment where installation is appropriate.
 
