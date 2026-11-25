@@ -4,11 +4,11 @@ alias beep="powershell.exe '[console]::beep(261.6,700)'"
 alias bods-proj="cd ~/Testing/BODS/ && pwd"
 
 # Scripts
-alias restrict_gtfs="~/.bash_scripts/restrict_gtfs.py"
-alias gtfsrt_polars_extract="~/.bash_scripts/gtfsrt_polars_extract.py"
-alias create_map="~/.bash_scripts/create_map.py"
-alias gis_layer_inventory="~/.bash_scripts/gis_layer_inventory.py"
-alias agg_to_gpkg="~/.bash_scripts/agg_to_gpkg.py"
+alias restrict_gtfs="~/.scripts/restrict_gtfs.py"
+alias gtfsrt_polars_extract="~/.scripts/gtfsrt_polars_extract.py"
+alias create_map="~/.scripts/create_map.py"
+alias gis_layer_inventory="~/.scripts/gis_layer_inventory.py"
+alias agg_to_gpkg="~/.scripts/agg_to_gpkg.py"
 
 # Notebooks
 alias jpnb="jupyter notebook"
