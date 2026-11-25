@@ -98,6 +98,9 @@ def main(argv=None):
         csv_to_parquet(args.output_csv)
         return 0
 
+    if len(paths) < 1:
+        raise ValueError(f"Given glob is incorrect. {glob_path=}")
+
     include_header = True
     with open(args.output_csv, "ab") as out_f:
         for path in paths:
