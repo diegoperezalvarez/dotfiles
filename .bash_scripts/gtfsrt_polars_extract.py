@@ -25,11 +25,11 @@ def parse_args(argv):
         "output_csv", help="Path to output csv file."
     )
     parser.add_argument(
-        "--to-parquet", default=False,
-        action=argparse.BooleanOptionalAction,
+        "--parquet",
+        action="store_true",
         help=(
-            "Optionally compress the output to parquet after processing."
-            "Running this script on an already created output.csv with this"
+            "Optionally compress the output to parquet after processing. "
+            "Running this script on an already created output.csv with this "
             "flag has the same effect."
         )
     )
@@ -94,7 +94,7 @@ def main(argv=None):
     args = parse_args(argv)
     paths = sorted(glob(args.glob_path))
 
-    if os.path.exists(args.output_csv) and args.to_parquet:
+    if os.path.exists(args.output_csv) and args.parquet:
         csv_to_parquet(args.output_csv)
         return 0
 
@@ -113,7 +113,7 @@ def main(argv=None):
             df.write_csv(out_f, include_header=include_header)
             include_header = False
 
-    if args.to_parquet:
+    if args.parquet:
          csv_to_parquet(args.output_csv)
 
     return 0
