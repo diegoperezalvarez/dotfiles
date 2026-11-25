@@ -3,9 +3,9 @@
 # Don't ignore these!
 !.agents/**
 !.bash_aliases
-!.bash_scripts/**
 !.bashrc
 !.github/**
 !.gitignore
 !.notes.md
 !.requirements.txt
+!.scripts/**
