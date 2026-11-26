@@ -1,57 +1,36 @@
-# Repository instructions
+# Dotfiles
 
-## Purpose and scope
+Personal dotfiles kept in a **bare git repo**: git dir `~/.dotfiles`, work tree `$HOME`. The remote is **public** on GitHub, so treat every committed line as published.
 
-This is a personal dotfiles repository managed as a **bare Git repository** with the home directory as its work tree. It contains Bash startup configuration and aliases, Python and shell helpers, dependency requirements, and reference notes. Changes should remain useful across machines and environments; do not assume every optional tool or platform is installed.
+## Running git
 
-## Repository map
+`.bashrc` returns early in non-interactive shells, so the `dotfiles` alias is not defined for agents. Use:
 
-- `.bashrc` — interactive Bash configuration, prompt, completion, PATH, WSL handling, and `~/.venv` activation.
-- `.bash_aliases` — shell aliases and functions, including helper-script aliases and optional AWS configuration.
-- `.scripts/` — Python and shell helpers for GTFS/GTFS-realtime, GIS, mapping, filtering, and dotfiles bootstrap.
-- `.requirements.txt` — Python dependencies for personal data, geospatial, visualization, and agent workflows.
-- `.notes.md` — personal reference material.
-- `.github/README.md` — repository setup documentation.
-- `.agents/AGENTS.md` — currently empty; reserved for agent-directory self-management.
-- `.gitignore` — whitelist-style ignore file; tracked files require explicit `!` exceptions.
+- `status.showUntrackedFiles` is `no`. To see new files, add `--untracked-files=all` and a path, e.g. `status --short --untracked-files=all .scripts`.
+- Never run `git add -A`, `add .` or `clean` here. They act on the whole home directory.
+- `.gitignore` is a whitelist: `*`, then `!` exceptions. A new top-level folder needs **both** `!.name/` and `!.name/**`. Without the first, git cannot see inside the folder and new files are silently ignored. A new top-level file needs `!.name`.
 
-## Working conventions
+## What is tracked
 
-- Preserve the bare-repository/home-directory installation model unless the task explicitly requires a model change.
-- Keep shell startup code safe for interactive use. Avoid expensive operations, unnecessary output, and workarounds that require every machine to have an optional dependency.
-- Quote Bash expansions that may contain spaces. Use `set -e` or explicit checks where appropriate, and guard platform-specific commands and files.
-- Keep Python helpers explicit about inputs, outputs, and dependencies. Prefer packages already listed in `.requirements.txt`; update that file when introducing a runtime dependency.
-- Do not add credentials, tokens, private keys, machine-specific paths, or account identifiers. Use environment variables or local, untracked configuration for secrets.
-- Keep reusable instructions in root `AGENTS.md`. If shared skills or generated MCP configuration are added later, use `.agents/` as the canonical source.
-- Keep agent-specific configuration in its native location. Do not duplicate it or invent synchronization infrastructure without a concrete need.
+| Path | What it is | Rules |
+|---|---|---|
+| `.bashrc` | Interactive shell setup: Homebrew, history, prompt, completion, `PATH`, WSL browser, activates `~/.venv` | Keep it fast and silent. Guard optional tools and files (`[ -x … ] &&`, `[ -f … ] &&`) as the existing lines do. Must work on Linux, WSL and macOS. |
+| `.bash_aliases` | Aliases and small functions, sourced by `.bashrc` | Keep the sections (`wsl things`, `Scripts`, `Notebooks`, `General`, `Other aliases`). Use single quotes when an alias contains `$(...)` or `$var`, so it expands when run, not when the file is sourced. |
+| `.scripts/` | Standalone Python CLIs, plus `init.sh` | See below. |
+| `.requirements.txt` | Packages for `~/.venv`, grouped by comment heading | Add top-level packages only. Note large transitive deps in a trailing comment, as the existing lines do. |
+| `.notes.md` | Personal command cheat sheet, searched with `qnotes <pattern>` | Keep one heading per command, with the command in backticks, so `qnotes` finds it. Replace account IDs, hosts and URLs with `XXXX` placeholders. |
+| `.github/README.md` | Symlink to `../.notes.md` so GitHub shows the notes | Edit `.notes.md`, never the symlink. |
+| `.agents/skills/<name>/` | Agent skills, shared across agents | Follow the `create-agnostic-skill` skill. No client, project or employer-confidential content (this repo is public); such skills go in untracked `~/.copilot/skills/`. |
 
-## Bootstrap safety
+- Each script is a standalone CLI: `#!/usr/bin/env python` shebang, module docstring explaining usage, `argparse`, errors to stderr with a non-zero exit.
+- Scripts run in `~/.venv`. Use packages already in `.requirements.txt`, and add any new runtime dependency there.
+- To add a script: create it, `chmod +x` it, add an alias under `# Scripts` in `.bash_aliases`, and check that git sees it (`status --untracked-files=all .scripts`).
+- `init.sh` is the bootstrap, and it is destructive. It clones the bare repo and runs `checkout -f`, which overwrites matching files in `$HOME`. It refuses to run as root. Never run it to test something.
 
-`.scripts/dotfiles_init.sh` is destructive:
+## Validate
 
-- It clones the repository as a bare repo into `~/.dotfiles`.
-- It hides untracked files in the home directory via `status.showUntrackedFiles no`.
-- It runs `git checkout -f` and overwrites matching files in `$HOME`.
-- It refuses to run with `sudo` or as root.
-- It makes executable `.sh` and `.py` files beneath `~/.scripts`.
-
-Review the script before running it. Back up any existing dotfiles that could conflict. Do not use bootstrap or other home-directory-modifying commands solely as validation.
-
-## Validation
-
-No automated test suite or CI workflow is currently present. Choose checks relevant to files changed:
-
-- Bash: `bash -n .bashrc .bash_aliases .scripts/*.sh`
-- Python: `python -m compileall -q .scripts`
-- Helper behavior: run it only with a small, safe fixture and avoid commands that modify the home directory.
-- Dependencies: verify `.requirements.txt` only in an environment where installation is appropriate.
-
-Report exactly what was tested and what could not be tested.
-
-## Adding files
-
-Because `.gitignore` uses whitelist rules, add a matching exception for every new tracked top-level file or directory. Keep the root `AGENTS.md` exception explicit:
-
-```gitignore
-!AGENTS.md
+```bash
+bash -n ~/.bashrc ~/.bash_aliases ~/.scripts/init.sh
+~/.venv/bin/python -c 'import ast,sys; [ast.parse(open(f).read(), f) for f in sys.argv[1:]]' ~/.scripts/*.py
+~/.venv/bin/python ~/.scripts/<script>.py --help   # for any script you changed
 ```

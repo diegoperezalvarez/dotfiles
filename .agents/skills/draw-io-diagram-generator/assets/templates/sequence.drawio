@@ -1,0 +1,98 @@
+<mxfile host="65bd71144e">
+    <diagram id="sequence" name="Sequence Diagram">
+        <mxGraphModel dx="1153" dy="1003" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;" value="Sequence Diagram" vertex="1">
+                    <mxGeometry height="40" width="500" x="334" y="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="actorA" parent="1" style="shape=mxgraph.uml.actor;pointerEvents=1;dashed=0;fillColor=#dae8fc;strokeColor=#6c8ebf;sketch=0;aspect=fixed;" value="Client" vertex="1">
+                    <mxGeometry height="80" width="60" x="110" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="actorB" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" value="&lt;b&gt;API Server&lt;/b&gt;" vertex="1">
+                    <mxGeometry height="60" width="160" x="480" y="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="actorC" parent="1" style="shape=mxgraph.flowchart.database;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" value="&lt;b&gt;Database&lt;/b&gt;" vertex="1">
+                    <mxGeometry height="80" width="80" x="870" y="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="lifA" edge="1" parent="1" style="edgeStyle=none;dashed=1;endArrow=none;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points"/>
+                        <mxPoint x="140" y="160" as="sourcePoint"/>
+                        <mxPoint x="140" y="780" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="lifB" edge="1" parent="1" style="edgeStyle=none;dashed=1;endArrow=none;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="560" y="160" as="sourcePoint"/>
+                        <mxPoint x="560" y="780" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="lifC" edge="1" parent="1" style="edgeStyle=none;dashed=1;endArrow=none;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="910" y="170" as="sourcePoint"/>
+                        <mxPoint x="910" y="780" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="actA1" parent="1" style="fillColor=#dae8fc;strokeColor=#6c8ebf;" value="" vertex="1">
+                    <mxGeometry height="170" width="20" x="130" y="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="actB1" parent="1" style="fillColor=#fff2cc;strokeColor=#d6b656;" value="" vertex="1">
+                    <mxGeometry height="150" width="20" x="550" y="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="actC1" parent="1" style="fillColor=#d5e8d4;strokeColor=#82b366;" value="" vertex="1">
+                    <mxGeometry height="40" width="20" x="900" y="320" as="geometry"/>
+                </mxCell>
+                <mxCell id="msg1" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;entryX=0;entryY=0;entryDx=0;entryDy=0;" value="1: POST /api/orders">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="520" y="250"/>
+                            <mxPoint x="520" y="250"/>
+                        </Array>
+                        <mxPoint x="410" y="250" as="sourcePoint"/>
+                        <mxPoint x="560" y="250" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="msg2" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" value="2: Validate &amp; Authenticate">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                        <Array as="points">
+                            <mxPoint x="660" y="280"/>
+                            <mxPoint x="660" y="300"/>
+                        </Array>
+                        <mxPoint x="570" y="280" as="sourcePoint"/>
+                        <mxPoint x="570" y="300" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="msg3" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" value="3: INSERT orders (...)">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="570" y="320" as="sourcePoint"/>
+                        <mxPoint x="900" y="320" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="msg4" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endFill=0;dashed=1;" value="4: {id: 42, status: created}">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="900" y="360" as="sourcePoint"/>
+                        <mxPoint x="570" y="360" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="msg5" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endFill=0;dashed=1;" value="5: 201 Created {orderId: 42}">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="550" y="410" as="sourcePoint"/>
+                        <mxPoint x="150" y="410" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="tZiKwgmJ9fAgIYrTFgC4-3" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;endFill=1;" target="note1" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="150" y="250" as="sourcePoint"/>
+                        <mxPoint x="550" y="240" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="note1" parent="1" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fontSize=11;fillColor=#fffacd;strokeColor=#aaa;size=13;" value="&lt;i&gt;Requires Authorization header&lt;/i&gt;" vertex="1">
+                    <mxGeometry height="40" width="200" x="200" y="230" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
